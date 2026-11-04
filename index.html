@@ -5,73 +5,74 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Verifikasi Data Siswa</title>
     <style>
-        body { font-family: Arial, sans-serif; margin: 40px; background-color: #f4f6f8; }
-        .card { max-width: 500px; margin: auto; background: white; padding: 25px; border-radius: 8px; box-shadow: 0 4px 8px rgba(0,0,0,0.1); }
+        body { font-family: Arial, sans-serif; margin: 40px; background-color: #f9f9f9; }
+        .container { max-width: 600px; background: white; padding: 20px; border-radius: 8px; box-shadow: 0 2px 4px rgba(0,0,0,0.1); }
         .form-group { margin-bottom: 15px; }
-        label { display: block; margin-bottom: 5px; font-weight: bold; color: #333; }
-        input[type="text"] { width: 100%; padding: 10px; box-sizing: border-box; border: 1px solid #ccc; border-radius: 4px; }
-        button { background-color: #28a745; color: white; padding: 12px 20px; border: none; border-radius: 4px; cursor: pointer; width: 100%; font-size: 16px; }
-        button:hover { background-color: #218838; }
-        #statusMessage { margin-top: 15px; text-align: center; font-weight: bold; }
+        label { display: block; margin-bottom: 5px; font-weight: bold; }
+        input[type="text"] { width: 100%; padding: 8px; box-sizing: border-box; }
+        button { background-color: #4CAF50; color: white; padding: 10px 15px; border: none; border-radius: 4px; cursor: pointer; }
+        button:hover { background-color: #45a049; }
     </style>
 </head>
 <body>
 
-<div class="card">
-    <h2>Form Verifikasi Kelurahan</h2>
-    <form id="verifForm">
+<div class="container">
+    <h2>Form Verifikasi Data Siswa</h2>
+    <form id="verificationForm">
         <div class="form-group">
-            <label for="nipd">NIPD Siswa:</label>
-            <input type="text" id="nipd" required placeholder="Contoh: 2627100240">
+            <label for="nipd">NIPD:</label>
+            <input type="text" id="nipd" name="nipd" required placeholder="Masukkan NIPD siswa">
         </div>
         
         <div class="form-group">
-            <label for="kelurahan">Kelurahan:</label>
-            <input type="text" id="kelurahan" required placeholder="Contoh: Sesuai / Ciptagumati">
+            <label for="kelurahanDesa">Kelurahan/Desa:</label>
+            <input type="text" id="kelurahanDesa" name="kelurahanDesa" required placeholder="Masukkan Kelurahan/Desa">
         </div>
 
-        <button type="submit" id="btnKirim">Simpan Data</button>
+        <button type="submit" id="submitBtn">Kirim / Verifikasi Sesuai</button>
     </form>
-    <p id="statusMessage"></p>
+    <p id="statusMessage" style="margin-top: 15px; font-weight: bold;"></p>
 </div>
 
 <script>
-    // URL Web App terbaru Anda sudah otomatis terpasang di sini
+    // URL Web App terbaru Anda yang sudah terhubung ke backend
     const WEB_APP_URL = "https://script.google.com/macros/s/AKfycbzROd3G1_m6FltUyzR5vD_bQlPmjcoI4xB4mD8NuWN8ROkKs9_cMZ7cuJqj5m-xgtFV2A/exec";
 
-    document.getElementById("verifForm").addEventListener("submit", function(e) {
+    document.getElementById("verificationForm").addEventListener("submit", function(e) {
         e.preventDefault();
         
-        const btn = document.getElementById("btnKirim");
-        const msg = document.getElementById("statusMessage");
+        const submitBtn = document.getElementById("submitBtn");
+        const statusMessage = document.getElementById("statusMessage");
         
-        btn.disabled = true;
-        msg.style.color = "blue";
-        msg.textContent = "Mengirim data...";
+        submitBtn.disabled = true;
+        statusMessage.style.color = "blue";
+        statusMessage.textContent = "Sedang mengirim data...";
 
-        // Di web tertulis "kelurahan", tapi dikirim ke script untuk mengisi "Kesesuaian Desa"
-        const payload = {
+        // Menyesuaikan input web agar dikirim ke kolom "Kesesuaian Desa" di spreadsheet
+        const formData = {
             nipd: document.getElementById("nipd").value,
-            "Kesesuaian Desa": document.getElementById("kelurahan").value 
+            "Kesesuaian Desa": document.getElementById("kelurahanDesa").value
         };
 
         fetch(WEB_APP_URL, {
             method: "POST",
             mode: "no-cors",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify(payload)
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify(formData)
         })
         .then(() => {
-            msg.style.color = "green";
-            msg.textContent = "Berhasil! Data tersimpan.";
-            btn.disabled = false;
-            document.getElementById("verifForm").reset();
+            statusMessage.style.color = "green";
+            statusMessage.textContent = "Data berhasil dikirim/disimpan!";
+            submitBtn.disabled = false;
+            document.getElementById("verificationForm").reset();
         })
-        .catch(err => {
-            console.error(err);
-            msg.style.color = "red";
-            msg.textContent = "Terjadi kesalahan koneksi.";
-            btn.disabled = false;
+        .catch(error => {
+            console.error("Error:", error);
+            statusMessage.style.color = "red";
+            statusMessage.textContent = "Terjadi kesalahan saat mengirim data.";
+            submitBtn.disabled = false;
         });
     });
 </script>
