@@ -100,7 +100,6 @@
             line-height: 1.4;
         }
         
-        /* Desain Kartu Per Item Data (Mobile Friendly) */
         .data-item-card {
             background: #f7fafc;
             border: 1px solid #e2e8f0;
@@ -187,6 +186,13 @@
         }
         .badge-sesuai { background-color: #c6f6d5; color: #22543d; width: 100%; text-align: center; }
         .badge-koreksi { background-color: #fed7d7; color: #c53030; width: 100%; word-break: break-word; }
+        
+        .inline-status {
+            font-size: 12px;
+            font-weight: 600;
+            margin-top: 6px;
+            display: none;
+        }
     </style>
 </head>
 <body>
@@ -287,6 +293,7 @@
                                 <div class="data-label">${row.label}</div>
                                 <div class="data-value">${row.val}</div>
                                 ${badgeHtml}
+                                <div id="statusText_${index}" class="inline-status"></div>
                                 <div class="action-row" id="actionContainer_${index}" style="margin-top: 10px;">
                                     <button class="btn-sesuai" onclick="kirimData('${row.label}', 'Sesuai', ${index})">Sesuai</button>
                                     <button class="btn-koreksi" onclick="bukaFormKoreksi(${index})">Koreksi</button>
@@ -320,6 +327,11 @@
     }
 
     function kirimData(fieldLabel, teksKirim, index) {
+        let statusText = document.getElementById(`statusText_${index}`);
+        statusText.style.color = "#d69e2e";
+        statusText.innerText = "⏳ Sedang menyimpan...";
+        statusText.style.display = "block";
+
         let payload = {
             nipd: currentSiswaNipd,
             nama: currentSiswaNama,
@@ -337,15 +349,23 @@
             if(teksKirim === 'Sesuai') {
                 badgeContainer.innerHTML = `<div class="status-badge badge-sesuai">✓ Status: Sesuai</div>`;
                 document.getElementById(`editContainer_${index}`).style.display = 'none';
-                alert(`"${fieldLabel}" berhasil disimpan sebagai Sesuai.`);
+                statusText.style.color = "#38a169";
+                statusText.innerText = "✓ Berhasil disimpan";
             } else {
                 badgeContainer.innerHTML = `<div class="status-badge badge-koreksi">✎ Koreksi Tercatat: <strong>${teksKirim}</strong></div>`;
-                alert(`Koreksi untuk "${fieldLabel}" berhasil dikirim!`);
                 bukaFormKoreksi(index);
+                statusText.style.color = "#38a169";
+                statusText.innerText = "✓ Koreksi berhasil dikirim";
             }
+            
+            // Hilangkan teks status kecil setelah 3 detik agar bersih
+            setTimeout(() => {
+                statusText.style.display = "none";
+            }, 3000);
         })
         .catch(err => {
-            alert('Gagal mengirim data. Silakan coba beberapa saat lagi.');
+            statusText.style.color = "#e53e3e";
+            statusText.innerText = "✕ Gagal menyimpan, coba lagi.";
             console.error(err);
         });
     }
