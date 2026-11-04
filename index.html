@@ -62,7 +62,8 @@
 </div>
 
 <script>
-    const API_URL = "https://script.google.com/macros/s/AKfycbw34q27cs94P5bTL3-f7p8wuYr6J82BxUxSzHnHLBeRrtjwx9wAjsLmro0SliwJ9NLbOg/exec";
+    // URL Web App terbaru Anda
+    const API_URL = "https://script.google.com/macros/s/AKfycbwoapyufYfUZtGLRTtm00BuNpRv9PZ-wRrtS4Rsn8VFbxUy4pK-NQIVmmypsRlKsClyGQ/exec";
     
     let currentSiswaNama = "";
     let currentSiswaNipd = "";
@@ -97,7 +98,7 @@
                         { label: "Nama", val: currentSiswaNama },
                         { label: "NIPD", val: currentSiswaNipd },
                         { label: "NISN", val: data.nisn || '-' },
-                        { label: "JK", val: data.jk === 'L' ? 'Laki-Laki' : (data.jk === 'P' ? 'Perempuan' : data.jk || '-') },
+                        { label: "Jenis Kelamin", val: data.jk === 'L' ? 'Laki-Laki' : (data.jk === 'P' ? 'Perempuan' : data.jk || '-') },
                         { label: "Tempat Lahir", val: data.tempatLahir || '-' },
                         { label: "Tanggal Lahir", val: tglLahirFormatted },
                         { label: "NIK", val: data.nik || '-' },
