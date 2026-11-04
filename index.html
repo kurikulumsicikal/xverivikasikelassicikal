@@ -186,6 +186,20 @@
         }
         .badge-sesuai { background-color: #c6f6d5; color: #22543d; width: 100%; text-align: center; }
         .badge-koreksi { background-color: #fed7d7; color: #c53030; width: 100%; word-break: break-word; }
+
+        /* Box Pernyataan Akhir */
+        .statement-box {
+            background: #fffaf0;
+            border: 1px solid #feebc8;
+            border-radius: 8px;
+            padding: 15px;
+            text-align: center;
+            margin-top: 20px;
+            font-size: 13px;
+            color: #744210;
+            line-height: 1.5;
+            font-weight: 600;
+        }
     </style>
 </head>
 <body>
@@ -207,154 +221,13 @@
             💡 <strong>Petunjuk:</strong> Periksa setiap data di bawah. Klik tombol <strong>Sesuai</strong> jika benar, atau klik <strong>Koreksi</strong> untuk mengetik perbaikan data administrasi.
         </div>
         <div id="dataCardList"></div>
+
+        <!-- Teks Pernyataan Akhir -->
+        <div class="statement-box">
+            📌 <strong>Pernyataan:</strong> Dengan ini saya menyatakan bahwa seluruh data administrasi di atas telah diperiksa dan sudah sesuai serta benar. Apabila di kemudian hari ternyata masih terdapat kesalahan data, maka hal tersebut sepenuhnya menjadi tanggung jawab saya pribadi.
+        </div>
     </div>
 </div>
 
 <script>
-    const API_URL = "https://script.google.com/macros/s/AKfycbxRvzqTiDlpJNr5kGVS6_Bh6PAvYR9x3ecZajvTv7nZkWBbeFTfAaXpJoq_VEi88G7YWA/exec";
-    let currentSiswaNama = "";
-    let currentSiswaNipd = "";
-
-    function verifikasiSiswa() {
-        const nipd = document.getElementById('nipdInput').value.trim();
-        const loadingDiv = document.getElementById('loading');
-        const errorBox = document.getElementById('errorBox');
-        const resultCard = document.getElementById('resultCard');
-
-        if (!nipd) {
-            alert('Harap masukkan NIPD terlebih dahulu!');
-            return;
-        }
-
-        resultCard.style.display = 'none';
-        errorBox.style.display = 'none';
-        loadingDiv.style.display = 'block';
-
-        fetch(`${API_URL}?nipd=${encodeURIComponent(nipd)}`)
-            .then(response => response.json())
-            .then(data => {
-                loadingDiv.style.display = 'none';
-
-                if (data.found) {
-                    currentSiswaNama = data.nama || '-';
-                    currentSiswaNipd = data.nipd || '-';
-
-                    let tglLahirFormatted = data.tanggalLahir ? new Date(data.tanggalLahir).toLocaleDateString('id-ID', { day: 'numeric', month: 'long', year: 'numeric' }) : '-';
-
-                    let rows = [
-                        { label: "Nama Lengkap", val: currentSiswaNama },
-                        { label: "Jenis Kelamin", val: data.jk === 'L' ? 'Laki-Laki' : (data.jk === 'P' ? 'Perempuan' : data.jk || '-') },
-                        { label: "NIPD", val: currentSiswaNipd },
-                        { label: "NISN", val: data.nisn || '-' },
-                        { label: "Tempat Lahir", val: data.tempatLahir || '-' },
-                        { label: "Tanggal Lahir", val: tglLahirFormatted },
-                        { label: "NIK", val: data.nik || '-' },
-                        { label: "Agama", val: data.agama || '-' },
-                        { label: "Alamat", val: data.alamat || '-' },
-                        { label: "RT", val: data.rt !== undefined && data.rt !== "" ? data.rt : '-' },
-                        { label: "RW", val: data.rw !== undefined && data.rw !== "" ? data.rw : '-' },
-                        { label: "Kelurahan/Desa", val: data.kelurahan || '-' },
-                        { label: "Kecamatan", val: data.kecamatan || '-' },
-                        { label: "Kode Pos", val: data.kodePos || '-' },
-                        { label: "Nama Ayah", val: data.namaAyah || '-' },
-                        { label: "Pekerjaan Ayah", val: data.pekerjaanAyah || '-' },
-                        { label: "Nama Ibu", val: data.namaIbu || '-' },
-                        { label: "Pekerjaan Ibu", val: data.pekerjaanIbu || '-' },
-                        { label: "Rombel Saat Ini", val: data.rombel || '-' },
-                        { label: "Sekolah Asal", val: data.sekolahAsal || '-' },
-                        { label: "Anak ke-", val: data.anakKe ? `Anak ke-${data.anakKe}` : '-' }
-                    ];
-
-                    let cardsHtml = "";
-                    
-                    rows.forEach((row, index) => {
-                        let savedVal = data.statusKesesuaian ? data.statusKesesuaian[row.label] : "";
-                        let badgeHtml = "";
-                        let defaultInputVal = "";
-
-                        if (savedVal === "Sesuai") {
-                            badgeHtml = `<div id="badgeContainer_${index}"><div class="status-badge badge-sesuai">✓ Status: Sesuai</div></div>`;
-                        } else if (savedVal && savedVal !== "") {
-                            badgeHtml = `<div id="badgeContainer_${index}"><div class="status-badge badge-koreksi">✎ Koreksi Tercatat: <strong>${savedVal}</strong></div></div>`;
-                            defaultInputVal = savedVal;
-                        } else {
-                            badgeHtml = `<div id="badgeContainer_${index}"></div>`;
-                        }
-
-                        cardsHtml += `
-                            <div class="data-item-card">
-                                <div class="data-label">${row.label}</div>
-                                <div class="data-value">${row.val}</div>
-                                ${badgeHtml}
-                                <div class="action-row" id="actionContainer_${index}" style="margin-top: 10px;">
-                                    <button class="btn-sesuai" onclick="kirimData('${row.label}', 'Sesuai', ${index})">Sesuai</button>
-                                    <button class="btn-koreksi" onclick="bukaFormKoreksi(${index})">Koreksi</button>
-                                </div>
-                                <div class="edit-container" id="editContainer_${index}">
-                                    <input type="text" id="editInput_${index}" class="edit-input" value="${defaultInputVal}" placeholder="Ketik perbaikan yang benar...">
-                                    <button class="btn-kirim" onclick="kirimKoreksiData('${row.label}', ${index})">Kirim Perbaikan</button>
-                                </div>
-                            </div>
-                        `;
-                    });
-
-                    document.getElementById('dataCardList').innerHTML = cardsHtml;
-                    resultCard.style.display = 'block';
-                } else {
-                    errorBox.innerHTML = 'Data siswa dengan NIPD <strong>' + nipd + '</strong> tidak ditemukan di database sekolah.';
-                    errorBox.style.display = 'block';
-                }
-            })
-            .catch(error => {
-                loadingDiv.style.display = 'none';
-                errorBox.innerHTML = 'Gagal terhubung ke server sekolah. Periksa kembali jaringan internet Anda.';
-                errorBox.style.display = 'block';
-                console.error(error);
-            });
-    }
-
-    function bukaFormKoreksi(index) {
-        let container = document.getElementById(`editContainer_${index}`);
-        container.style.display = container.style.display === 'block' ? 'none' : 'block';
-    }
-
-    function kirimData(fieldLabel, teksKirim, index) {
-        let payload = {
-            nipd: currentSiswaNipd,
-            nama: currentSiswaNama,
-            field: fieldLabel,
-            koreksi: teksKirim
-        };
-
-        fetch(API_URL, {
-            method: 'POST',
-            body: JSON.stringify(payload)
-        })
-        .then(res => res.json())
-        .then(response => {
-            let badgeContainer = document.getElementById(`badgeContainer_${index}`);
-            if(teksKirim === 'Sesuai') {
-                badgeContainer.innerHTML = `<div class="status-badge badge-sesuai">✓ Status: Sesuai</div>`;
-                document.getElementById(`editContainer_${index}`).style.display = 'none';
-            } else {
-                badgeContainer.innerHTML = `<div class="status-badge badge-koreksi">✎ Koreksi Tercatat: <strong>${teksKirim}</strong></div>`;
-                bukaFormKoreksi(index);
-            }
-        })
-        .catch(err => {
-            console.error(err);
-        });
-    }
-
-    function kirimKoreksiData(fieldLabel, index) {
-        let inputVal = document.getElementById(`editInput_${index}`).value.trim();
-        if (!inputVal) {
-            return;
-        }
-        
-        kirimData(fieldLabel, inputVal, index);
-    }
-</script>
-
-</body>
-</html>
+    const API_URL = "
