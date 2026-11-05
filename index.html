@@ -23,7 +23,6 @@
         .result-card { display: none; margin-top: 15px; }
         .instruction { background-color: #eff6ff; border: 1px solid #dbeafe; color: #1e40af; padding: 12px 14px; border-radius: 8px; font-size: 12px; margin-bottom: 15px; line-height: 1.4; }
         
-        /* Kotak Resume Progress Status di Atas */
         .resume-box { background: #eff6ff; border: 1px solid #bfdbfe; border-radius: 10px; padding: 15px; margin-bottom: 20px; }
         .resume-title { margin-top: 0; color: #1e40af; font-size: 15px; margin-bottom: 10px; font-weight: bold; }
         .resume-grid { display: flex; gap: 10px; text-align: center; }
@@ -31,47 +30,37 @@
         .resume-item-koreksi { flex: 1; background: #fee2e2; padding: 8px; border-radius: 6px; }
         .resume-item-belum { flex: 1; background: #f3f4f6; padding: 8px; border-radius: 6px; }
 
-        .data-item-card { background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 10px; padding: 14px; margin-bottom: 12px; transition: box-shadow 0.2s; }
-        .data-item-card:hover { box-shadow: 0 2px 8px rgba(0,0,0,0.04); }
+        .data-item-card { background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 10px; padding: 14px; margin-bottom: 12px; }
         .data-label { font-size: 12px; font-weight: 700; color: #2563eb; text-transform: uppercase; margin-bottom: 4px; letter-spacing: 0.5px; }
         .data-value { font-size: 15px; font-weight: 600; color: #1e293b; margin-bottom: 10px; word-break: break-word; }
         .action-row { display: flex; gap: 8px; margin-top: 8px; }
         
-        /* Tombol Sesuai Biru, Koreksi Merah */
-        .btn-sesuai { background-color: #2563eb; color: white; border: none; padding: 7px 14px; border-radius: 6px; cursor: pointer; font-size: 13px; font-weight: 600; flex: 1; transition: background-color 0.2s; }
+        .btn-sesuai { background-color: #2563eb; color: white; border: none; padding: 7px 14px; border-radius: 6px; cursor: pointer; font-size: 13px; font-weight: 600; flex: 1; }
         .btn-sesuai:hover { background-color: #1d4ed8; }
-        .btn-koreksi { background-color: #dc2626; color: white; border: none; padding: 7px 14px; border-radius: 6px; cursor: pointer; font-size: 13px; font-weight: 600; flex: 1; transition: background-color 0.2s; }
+        .btn-koreksi { background-color: #dc2626; color: white; border: none; padding: 7px 14px; border-radius: 6px; cursor: pointer; font-size: 13px; font-weight: 600; flex: 1; }
         .btn-koreksi:hover { background-color: #b91c1c; }
 
         .edit-container { display: none; margin-top: 12px; }
         .edit-input { width: 100%; padding: 9px 12px; font-size: 14px; border: 2px solid #bfdbfe; border-radius: 6px; margin-bottom: 8px; outline: none; }
-        .edit-input:focus { border-color: #2563eb; }
-        
-        /* Tombol Kirim Perbaikan warna Hijau */
-        .btn-kirim { background-color: #16a34a; color: white; border: none; padding: 8px 12px; border-radius: 6px; cursor: pointer; font-size: 13px; width: 100%; font-weight: 600; transition: background-color 0.2s; }
+        .btn-kirim { background-color: #16a34a; color: white; border: none; padding: 8px 12px; border-radius: 6px; cursor: pointer; font-size: 13px; width: 100%; font-weight: 600; }
         .btn-kirim:hover { background-color: #15803d; }
 
         .status-badge { display: inline-block; padding: 6px 12px; border-radius: 6px; font-size: 12px; font-weight: bold; margin-top: 6px; }
         .badge-sesuai { background-color: #dcfce7; color: #166534; width: 100%; text-align: center; }
         .badge-koreksi { background-color: #fee2e2; color: #991b1b; width: 100%; word-break: break-word; }
 
-        /* Kotak Resume Keseluruhan Data di Bawah */
         .final-summary-box { background: #f8fafc; border: 2px solid #cbd5e1; border-radius: 10px; padding: 18px; margin-top: 25px; margin-bottom: 20px; }
         .final-summary-header { display: flex; justify-content: space-between; align-items: center; border-bottom: 2px solid #e2e8f0; padding-bottom: 8px; margin-bottom: 12px; }
         .final-summary-title { margin: 0; color: #1e40af; font-size: 16px; font-weight: bold; text-transform: uppercase; }
         .btn-print { background-color: #0284c7; color: white; border: none; padding: 6px 12px; border-radius: 6px; font-size: 12px; font-weight: 600; cursor: pointer; }
-        .btn-print:hover { background-color: #0369a1; }
-
+        
         .final-summary-list { font-size: 14px; color: #334155; line-height: 1.6; }
         .final-summary-row { display: flex; margin-bottom: 6px; border-bottom: 1px dashed #e2e8f0; padding-bottom: 4px; }
         .final-summary-label { width: 40%; font-weight: 600; color: #475569; }
         .final-summary-val { width: 60%; font-weight: 500; color: #0f172a; word-break: break-word; }
-        
-        /* Teks Koreksi di Resume / Biodata tetap Merah */
         .val-koreksi-text { color: #dc2626; font-weight: 600; }
 
         .statement-box { background: #eff6ff; border: 1px solid #bfdbfe; border-radius: 10px; padding: 15px; text-align: center; margin-top: 20px; font-size: 13px; color: #1e40af; line-height: 1.5; font-weight: 600; }
-
         .title-cetak { display: none; }
 
         @media print {
@@ -94,7 +83,7 @@
 
 <div class="container">
     <h2>Verifikasi Data Siswa Kelas X</h2>
-    <p class="subtitle">Masukkan NIPD dan Tanggal Lahir (Contoh: 2010-05-17) untuk masuk.</p>
+    <p class="subtitle">Masukkan NIPD dan Tanggal Lahir (Contoh: 2010-06-26) untuk masuk.</p>
     
     <div class="search-box">
         <input type="text" id="nipdInput" placeholder="Masukkan NIPD Anda...">
@@ -124,7 +113,7 @@
             </div>
         </div>
 
-        <div class="instruction" id="instructionBox">
+        <div class="instruction">
             💡 <strong>Petunjuk:</strong> Periksa setiap data di bawah. Klik tombol <strong>Sesuai</strong> jika benar, atau klik <strong>Koreksi</strong> untuk mengetik perbaikan data administrasi.
         </div>
         
@@ -134,7 +123,6 @@
             <div class="final-summary-header">
                 <div class="final-summary-title title-layar">📄 Resume Keseluruhan Data Anda</div>
                 <div class="final-summary-title title-cetak">BIODATA SISWA</div>
-                
                 <button class="btn-print" onclick="window.print()">🖨️ Cetak / Simpan A4</button>
             </div>
             <div class="final-summary-list" id="finalSummaryContent"></div>
@@ -147,7 +135,7 @@
 </div>
 
 <script>
-    const API_URL = "https://script.google.com/macros/s/AKfycbwiGKfHzAQ9R9pFD_I39CiSTViO3JzFGn-qDKqEoZWQQZoWfhS1s-hA64vC9YfhEfBz/exec";
+    const API_URL = "https://script.google.com/macros/s/AKfycbx_zSzJScu2H0W9yaJlRV4tr_xP4KvBsvzWUeC36Bhl4bd5QVo6T1sMRxCanHHN7cPFHQ/exec";
     
     let currentSiswaNama = "";
     let currentSiswaNipd = "";
@@ -170,187 +158,4 @@
         errorBox.style.display = 'none';
         loadingDiv.style.display = 'block';
 
-        fetch(`${API_URL}?nipd=${encodeURIComponent(nipd)}&password=${encodeURIComponent(password)}`)
-            .then(response => response.json())
-            .then(data => {
-                loadingDiv.style.display = 'none';
-
-                if (data.found) {
-                    currentSiswaNama = data.nama || '-';
-                    currentSiswaNipd = data.nipd || '-';
-
-                    let tglLahirFormatted = data.tanggalLahir ? new Date(data.tanggalLahir).toLocaleDateString('id-ID', { day: 'numeric', month: 'long', year: 'numeric' }) : '-';
-
-                    loadedRowsData = [
-                        { label: "Nama", val: currentSiswaNama },
-                        { label: "NIPD", val: currentSiswaNipd },
-                        { label: "NISN", val: data.nisn || '-' },
-                        { label: "Jenis Kelamin", val: data.jk === 'L' ? 'Laki-Laki' : (data.jk === 'P' ? 'Perempuan' : data.jk || '-') },
-                        { label: "Tempat Lahir", val: data.tempatLahir || '-' },
-                        { label: "Tanggal Lahir", val: tglLahirFormatted },
-                        { label: "NIK", val: data.nik || '-' },
-                        { label: "Agama", val: data.agama || '-' },
-                        { label: "Alamat", val: data.alamat || '-' },
-                        { label: "RT", val: data.rt !== undefined && data.rt !== "" ? data.rt : '-' },
-                        { label: "RW", val: data.rw !== undefined && data.rw !== "" ? data.rw : '-' },
-                        { label: "Desa", val: data.desa || '-' },
-                        { label: "Kecamatan", val: data.kecamatan || '-' },
-                        { label: "Kode Pos", val: data.kodePos || '-' },
-                        { label: "Nama Ayah", val: data.namaAyah || '-' },
-                        { label: "Pekerjaan", val: data.pekerjaanAyah || '-' },
-                        { label: "Nama Ibu", val: data.namaIbu || '-' },
-                        { label: "Pekerjaan Ibu", val: data.pekerjaanIbu || '-' },
-                        { label: "Rombel Saat Ini", val: data.rombel || '-' },
-                        { label: "Sekolah Asal", val: data.sekolahAsal || '-' },
-                        { label: "Anak", val: data.anakKe ? `Anak ke-${data.anakKe}` : '-' }
-                    ];
-
-                    loadedRowsData.forEach((row, idx) => {
-                        let savedVal = data.statusKesesuaian ? data.statusKesesuaian[row.label] : "";
-                        if (savedVal && savedVal !== "Sesuai") {
-                            row.koreksiVal = savedVal;
-                        } else {
-                            row.koreksiVal = "";
-                        }
-                    });
-
-                    totalFieldsCount = loadedRowsData.length;
-                    renderUI();
-                    resultCard.style.display = 'block';
-                    updateResume();
-                } else {
-                    errorBox.innerHTML = data.message || 'NIPD tidak ditemukan atau tanggal lahir salah.';
-                    errorBox.style.display = 'block';
-                }
-            })
-            .catch(error => {
-                loadingDiv.style.display = 'none';
-                errorBox.innerHTML = 'Gagal terhubung ke server sekolah. Periksa kembali jaringan internet Anda.';
-                errorBox.style.display = 'block';
-                console.error(error);
-            });
-    }
-
-    function renderUI() {
-        let cardsHtml = "";
-        let finalSummaryHtml = "";
-
-        loadedRowsData.forEach((row, index) => {
-            let savedVal = row.koreksiVal;
-            let badgeHtml = "";
-            let defaultInputVal = "";
-            let displayValHtml = row.val;
-
-            if (savedVal === "Sesuai") {
-                badgeHtml = `<div id="badgeContainer_${index}"><div class="status-badge badge-sesuai">✓ Status: Sesuai</div></div>`;
-            } else if (savedVal && savedVal !== "") {
-                badgeHtml = `<div id="badgeContainer_${index}"><div class="status-badge badge-koreksi">✎ Koreksi Tercatat: <strong>${savedVal}</strong></div></div>`;
-                defaultInputVal = savedVal;
-                displayValHtml = `${row.val} <span class="val-koreksi-text">(Koreksi: ${savedVal})</span>`;
-            } else {
-                badgeHtml = `<div id="badgeContainer_${index}"></div>`;
-            }
-
-            finalSummaryHtml += `
-                <div class="final-summary-row">
-                    <div class="final-summary-label">${row.label}</div>
-                    <div class="final-summary-val" id="summaryVal_${index}">: ${displayValHtml}</div>
-                </div>
-            `;
-
-            cardsHtml += `
-                <div class="data-item-card">
-                    <div class="data-label">${row.label}</div>
-                    <div class="data-value">${row.val}</div>
-                    ${badgeHtml}
-                    <div class="action-row" id="actionContainer_${index}" style="margin-top: 10px;">
-                        <button class="btn-sesuai" onclick="kirimData('${row.label}', 'Sesuai', ${index})">Sesuai</button>
-                        <button class="btn-koreksi" onclick="bukaFormKoreksi(${index})">Koreksi</button>
-                    </div>
-                    <div class="edit-container" id="editContainer_${index}">
-                        <input type="text" id="editInput_${index}" class="edit-input" value="${defaultInputVal}" placeholder="Ketik perbaikan yang benar...">
-                        <button class="btn-kirim" onclick="kirimKoreksiData('${row.label}', ${index})">Kirim Perbaikan</button>
-                    </div>
-                </div>
-            `;
-        });
-
-        document.getElementById('dataCardList').innerHTML = cardsHtml;
-        document.getElementById('finalSummaryContent').innerHTML = finalSummaryHtml;
-    }
-
-    function bukaFormKoreksi(index) {
-        let container = document.getElementById(`editContainer_${index}`);
-        container.style.display = container.style.display === 'block' ? 'none' : 'block';
-    }
-
-    function updateResume() {
-        let sesuai = 0;
-        let koreksi = 0;
-        let belum = 0;
-
-        for (let i = 0; i < totalFieldsCount; i++) {
-            let badgeContainer = document.getElementById(`badgeContainer_${i}`);
-            let badgeText = badgeContainer ? badgeContainer.innerText : "";
-
-            if (badgeText.includes("Sesuai")) {
-                sesuai++;
-            } else if (badgeText.includes("Koreksi Tercatat")) {
-                koreksi++;
-            } else {
-                belum++;
-            }
-        }
-
-        document.getElementById('countSesuai').innerText = sesuai;
-        document.getElementById('countKoreksi').innerText = koreksi;
-        document.getElementById('countBelum').innerText = belum;
-    }
-
-    function kirimData(fieldLabel, teksKirim, index) {
-        let payload = {
-            nipd: currentSiswaNipd,
-            nama: currentSiswaNama,
-            field: fieldLabel,
-            koreksi: teksKirim
-        };
-
-        fetch(API_URL, {
-            method: 'POST',
-            body: JSON.stringify(payload)
-        })
-        .then(res => res.json())
-        .then(response => {
-            let badgeContainer = document.getElementById(`badgeContainer_${index}`);
-            let summaryValElem = document.getElementById(`summaryVal_${index}`);
-            
-            if(teksKirim === 'Sesuai') {
-                loadedRowsData[index].koreksiVal = "";
-                badgeContainer.innerHTML = `<div class="status-badge badge-sesuai">✓ Status: Sesuai</div>`;
-                document.getElementById(`editContainer_${index}`).style.display = 'none';
-                summaryValElem.innerHTML = `: ${loadedRowsData[index].val}`;
-            } else {
-                loadedRowsData[index].koreksiVal = teksKirim;
-                badgeContainer.innerHTML = `<div class="status-badge badge-koreksi">✎ Koreksi Tercatat: <strong>${teksKirim}</strong></div>`;
-                bukaFormKoreksi(index);
-                summaryValElem.innerHTML = `: ${loadedRowsData[index].val} <span class="val-koreksi-text">(Koreksi: ${teksKirim})</span>`;
-            }
-            updateResume();
-        })
-        .catch(err => {
-            console.error(err);
-        });
-    }
-
-    function kirimKoreksiData(fieldLabel, index) {
-        let inputVal = document.getElementById(`editInput_${index}`).value.trim();
-        if (!inputVal) {
-            return;
-        }
-        
-        kirimData(fieldLabel, inputVal, index);
-    }
-</script>
-
-</body>
-</html>
+        fetch
