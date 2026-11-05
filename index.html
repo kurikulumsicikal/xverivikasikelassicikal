@@ -88,11 +88,11 @@
 
 <div class="container">
     <h2>Verifikasi Data Siswa Kelas X</h2>
-    <p class="subtitle">Masukkan NIPD dan Tanggal Lahir (Contoh: 2010-06-26) untuk masuk.</p>
+    <p class="subtitle">Masukkan NIPD dan Tanggal Lahir (Contoh: 26062010 atau 2010-06-26) untuk masuk.</p>
     
     <div class="search-box">
         <input type="text" id="nipdInput" placeholder="Masukkan NIPD Anda...">
-        <input type="text" id="passwordInput" placeholder="Masukkan Tanggal Lahir (YYYY-MM-DD)...">
+        <input type="text" id="passwordInput" placeholder="Masukkan Tanggal Lahir (ddmmYYYY / YYYY-MM-DD)...">
         <button class="btn-cek" onclick="verifikasiSiswa()">Cek Data</button>
     </div>
 
@@ -140,7 +140,7 @@
 </div>
 
 <script>
-    const API_URL = "https://script.google.com/macros/s/AKfycbx_zSzJScu2H0W9yaJlRV4tr_xP4KvBsvzWUeC36Bhl4bd5QVo6T1sMRxCanHHN7cPFHQ/exec";
+    const API_URL = "https://script.google.com/macros/s/AKfycbzHmZGP88erq9UITtXFlPDun4gl98tzx24vdE_X8H7Yg-14V74qFr98wQzLK44Rq2Ah/exec";
     
     let currentSiswaNama = "";
     let currentSiswaNipd = "";
