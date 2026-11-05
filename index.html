@@ -12,8 +12,8 @@
         p.subtitle { text-align: center; color: #4b5563; margin-bottom: 20px; font-size: 13px; }
         
         .search-box { display: flex; flex-direction: column; gap: 8px; margin-bottom: 15px; }
-        input[type="text"], input[type="date"] { width: 100%; padding: 11px 14px; border: 2px solid #bfdbfe; border-radius: 8px; font-size: 15px; outline: none; transition: border-color 0.2s; }
-        input[type="text"]:focus, input[type="date"]:focus { border-color: #2563eb; }
+        input[type="text"] { width: 100%; padding: 11px 14px; border: 2px solid #bfdbfe; border-radius: 8px; font-size: 15px; outline: none; transition: border-color 0.2s; }
+        input[type="text"]:focus { border-color: #2563eb; }
         
         .btn-cek { padding: 11px 18px; background-color: #2563eb; color: white; border: none; border-radius: 8px; font-size: 15px; font-weight: 600; cursor: pointer; transition: background-color 0.2s; width: 100%; }
         .btn-cek:hover { background-color: #1d4ed8; }
@@ -94,11 +94,11 @@
 
 <div class="container">
     <h2>Verifikasi Data Siswa Kelas X</h2>
-    <p class="subtitle">Masukkan NIPD dan Tanggal Lahir Anda untuk masuk ke sistem verifikasi.</p>
+    <p class="subtitle">Masukkan NIPD dan Tanggal Lahir (Contoh: 2010-05-17) untuk masuk.</p>
     
     <div class="search-box">
         <input type="text" id="nipdInput" placeholder="Masukkan NIPD Anda...">
-        <input type="date" id="passwordInput" placeholder="Pilih Tanggal Lahir (Password)...">
+        <input type="text" id="passwordInput" placeholder="Masukkan Tanggal Lahir (YYYY-MM-DD)...">
         <button class="btn-cek" onclick="verifikasiSiswa()">Cek Data</button>
     </div>
 
@@ -162,7 +162,7 @@
         const resultCard = document.getElementById('resultCard');
 
         if (!nipd || !password) {
-            alert('Harap masukkan NIPD dan pilih Tanggal Lahir terlebih dahulu!');
+            alert('Harap masukkan NIPD dan Tanggal Lahir terlebih dahulu!');
             return;
         }
 
