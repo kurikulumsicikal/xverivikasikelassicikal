@@ -3,11 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Verifikasi Kesesuaian Data Siswa - Kelas X</title>
+    <title>Verifikasi Kesesuaian Data Siswa - Kelas XI</title>
     <style>
         * { box-sizing: border-box; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
         body { background-color: #f0f9ff; margin: 0; padding: 10px; display: flex; justify-content: center; align-items: flex-start; min-height: 100vh; }
-        .container { background: #ffffff; padding: 25px 20px; border-radius: 14px; box-shadow: 0 6px 20px rgba(2, 132, 199, 0.15); max-width: 600px; width: 100%; margin-top: 10px; border-top: 5px solid #0284c7; }
+        .container { background: #ffffff; padding: 25px 20px; border-radius: 14px; box-shadow: 0 6px 20px rgba(2, 132, 199, 0.1); max-width: 600px; width: 100%; margin-top: 10px; border-top: 5px solid #0284c7; }
         h2 { text-align: center; color: #0369a1; margin-top: 0; margin-bottom: 6px; font-size: 22px; }
         p.subtitle { text-align: center; color: #4b5563; margin-bottom: 20px; font-size: 13px; }
         
@@ -33,23 +33,21 @@
         .data-item-card { background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 10px; padding: 14px; margin-bottom: 12px; }
         .data-label { font-size: 12px; font-weight: 700; color: #0284c7; text-transform: uppercase; margin-bottom: 4px; letter-spacing: 0.5px; }
         .data-value { font-size: 15px; font-weight: 600; color: #1e293b; margin-bottom: 10px; word-break: break-word; }
-        .action-row { display: flex; gap: 8px; margin-top: 8px; position: relative; z-index: 2; }
+        .action-row { display: flex; gap: 8px; margin-top: 8px; }
         
-        .btn-sesuai { background-color: #86efac; color: #14532d; border: 1px solid #4ade80; padding: 7px 14px; border-radius: 6px; cursor: pointer; font-size: 13px; font-weight: 700; flex: 1; }
-        .btn-sesuai:hover { background-color: #4ade80; }
-        
-        .btn-koreksi { background-color: #f97316; color: white; border: none; padding: 7px 14px; border-radius: 6px; cursor: pointer; font-size: 13px; font-weight: 600; flex: 1; }
-        .btn-koreksi:hover { background-color: #ea580c; }
+        .btn-sesuai { background-color: #0284c7; color: white; border: none; padding: 7px 14px; border-radius: 6px; cursor: pointer; font-size: 13px; font-weight: 600; flex: 1; }
+        .btn-sesuai:hover { background-color: #0369a1; }
+        .btn-koreksi { background-color: #dc2626; color: white; border: none; padding: 7px 14px; border-radius: 6px; cursor: pointer; font-size: 13px; font-weight: 600; flex: 1; }
+        .btn-koreksi:hover { background-color: #b91c1c; }
 
-        .edit-container { display: none; margin-top: 12px; position: relative; z-index: 3; background: #ffffff; padding: 8px; border-radius: 6px; border: 1px solid #cbd5e1; }
+        .edit-container { display: none; margin-top: 12px; }
         .edit-input { width: 100%; padding: 9px 12px; font-size: 14px; border: 2px solid #bae6fd; border-radius: 6px; margin-bottom: 8px; outline: none; }
-        
-        .btn-kirim { background-color: #2563eb; color: white; border: none; padding: 8px 12px; border-radius: 6px; cursor: pointer; font-size: 13px; width: 100%; font-weight: 600; }
-        .btn-kirim:hover { background-color: #1d4ed8; }
+        .btn-kirim { background-color: #16a34a; color: white; border: none; padding: 8px 12px; border-radius: 6px; cursor: pointer; font-size: 13px; width: 100%; font-weight: 600; }
+        .btn-kirim:hover { background-color: #15803d; }
 
         .status-badge { display: inline-block; padding: 6px 12px; border-radius: 6px; font-size: 12px; font-weight: bold; margin-top: 6px; }
         .badge-sesuai { background-color: #dcfce7; color: #166534; width: 100%; text-align: center; }
-        .badge-koreksi { background-color: #fee2e2; color: #dc2626; width: 100%; word-break: break-word; }
+        .badge-koreksi { background-color: #fee2e2; color: #991b1b; width: 100%; word-break: break-word; }
 
         .final-summary-box { background: #f8fafc; border: 2px solid #cbd5e1; border-radius: 10px; padding: 18px; margin-top: 25px; margin-bottom: 20px; }
         .final-summary-header { display: flex; justify-content: space-between; align-items: center; border-bottom: 2px solid #e2e8f0; padding-bottom: 8px; margin-bottom: 12px; }
@@ -77,14 +75,14 @@
             .final-summary-row { border-bottom: 1px solid #cbd5e1 !important; padding-bottom: 6px !important; margin-bottom: 8px !important; }
             .final-summary-label { color: #000000 !important; }
             .final-summary-val { color: #000000 !important; }
-            .val-koreksi-text { color: #dc2626 !important; }
+            .val-koreksi-text { color: #991b1b !important; }
         }
     </style>
 </head>
 <body>
 
 <div class="container">
-    <h2>Verifikasi Data Siswa Kelas X</h2>
+    <h2>Verifikasi Data Siswa Kelas XI</h2>
     <p class="subtitle">Masukkan NIPD dan Tanggal Lahir (Contoh: 2010-06-26) untuk masuk.</p>
     
     <div class="search-box">
@@ -105,8 +103,8 @@
                     <div id="countSesuai" style="font-size: 18px; font-weight: bold; color: #15803d;">0</div>
                 </div>
                 <div class="resume-item-koreksi">
-                    <div style="font-size: 11px; color: #dc2626; font-weight: bold;">KOREKSI</div>
-                    <div id="countKoreksi" style="font-size: 18px; font-weight: bold; color: #dc2626;">0</div>
+                    <div style="font-size: 11px; color: #991b1b; font-weight: bold;">KOREKSI</div>
+                    <div id="countKoreksi" style="font-size: 18px; font-weight: bold; color: #b91c1c;">0</div>
                 </div>
                 <div class="resume-item-belum">
                     <div style="font-size: 11px; color: #4b5563; font-weight: bold;">BELUM</div>
@@ -137,7 +135,7 @@
 </div>
 
 <script>
-    const API_URL = "https://script.google.com/macros/s/AKfycbwiGKfHzAQ9R9pFD_I39CiSTViO3JzFGn-qDKqEoZWQQZoWfhS1s-hA64vC9YfhEfBz/exec";
+    const API_URL = "https://script.google.com/macros/s/AKfycbzeWdobNcj3lPbuvohmTw5YCyXJzibXSez_tApSme8DGAroIMnHMvoI6rbi6b18w_-b/exec";
     
     let currentSiswaNama = "";
     let currentSiswaNipd = "";
@@ -249,7 +247,7 @@
                     <div class="data-label">${row.label}</div>
                     <div class="data-value">${row.val}</div>
                     ${badgeHtml}
-                    <div class="action-row">
+                    <div class="action-row" style="margin-top: 10px;">
                         <button class="btn-sesuai" onclick="kirimData('${row.label}', 'Sesuai', ${index})">Sesuai</button>
                         <button class="btn-koreksi" onclick="bukaFormKoreksi(${index})">Koreksi</button>
                     </div>
