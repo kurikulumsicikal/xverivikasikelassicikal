@@ -7,51 +7,53 @@
     <style>
         * { box-sizing: border-box; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
         body { background-color: #f0fdf4; margin: 0; padding: 10px; display: flex; justify-content: center; align-items: flex-start; min-height: 100vh; }
-        .container { background: #ffffff; padding: 25px 20px; border-radius: 14px; box-shadow: 0 6px 20px rgba(37, 99, 235, 0.1); max-width: 600px; width: 100%; margin-top: 10px; border-top: 5px solid #2563eb; }
-        h2 { text-align: center; color: #1e40af; margin-top: 0; margin-bottom: 6px; font-size: 22px; }
+        .container { background: #ffffff; padding: 25px 20px; border-radius: 14px; box-shadow: 0 6px 20px rgba(22, 163, 74, 0.15); max-width: 600px; width: 100%; margin-top: 10px; border-top: 5px solid #16a34a; }
+        h2 { text-align: center; color: #15803d; margin-top: 0; margin-bottom: 6px; font-size: 22px; }
         p.subtitle { text-align: center; color: #4b5563; margin-bottom: 20px; font-size: 13px; }
         
         .search-box { display: flex; flex-direction: column; gap: 8px; margin-bottom: 15px; }
-        input[type="text"] { width: 100%; padding: 11px 14px; border: 2px solid #bfdbfe; border-radius: 8px; font-size: 15px; outline: none; transition: border-color 0.2s; }
-        input[type="text"]:focus { border-color: #2563eb; }
+        input[type="text"] { width: 100%; padding: 11px 14px; border: 2px solid #bbf7d0; border-radius: 8px; font-size: 15px; outline: none; transition: border-color 0.2s; }
+        input[type="text"]:focus { border-color: #16a34a; }
         
-        .btn-cek { padding: 11px 18px; background-color: #2563eb; color: white; border: none; border-radius: 8px; font-size: 15px; font-weight: 600; cursor: pointer; transition: background-color 0.2s; width: 100%; }
-        .btn-cek:hover { background-color: #1d4ed8; }
+        .btn-cek { padding: 11px 18px; background-color: #16a34a; color: white; border: none; border-radius: 8px; font-size: 15px; font-weight: 600; cursor: pointer; transition: background-color 0.2s; width: 100%; }
+        .btn-cek:hover { background-color: #15803d; }
         
-        .loading { text-align: center; color: #1e40af; display: none; margin: 20px 0; font-weight: 600; font-size: 14px; }
+        .loading { text-align: center; color: #15803d; display: none; margin: 20px 0; font-weight: 600; font-size: 14px; }
         .error-box { background-color: #fef2f2; color: #991b1b; padding: 14px; border-radius: 8px; border: 1px solid #fecaca; display: none; text-align: center; margin-top: 15px; font-size: 14px; font-weight: 600; }
         .result-card { display: none; margin-top: 15px; }
-        .instruction { background-color: #eff6ff; border: 1px solid #dbeafe; color: #1e40af; padding: 12px 14px; border-radius: 8px; font-size: 12px; margin-bottom: 15px; line-height: 1.4; }
+        .instruction { background-color: #f0fdf4; border: 1px solid #dcfce7; color: #15803d; padding: 12px 14px; border-radius: 8px; font-size: 12px; margin-bottom: 15px; line-height: 1.4; }
         
-        .resume-box { background: #eff6ff; border: 1px solid #bfdbfe; border-radius: 10px; padding: 15px; margin-bottom: 20px; }
-        .resume-title { margin-top: 0; color: #1e40af; font-size: 15px; margin-bottom: 10px; font-weight: bold; }
+        .resume-box { background: #f0fdf4; border: 1px solid #bbf7d0; border-radius: 10px; padding: 15px; margin-bottom: 20px; }
+        .resume-title { margin-top: 0; color: #15803d; font-size: 15px; margin-bottom: 10px; font-weight: bold; }
         .resume-grid { display: flex; gap: 10px; text-align: center; }
         .resume-item-sesuai { flex: 1; background: #dcfce7; padding: 8px; border-radius: 6px; }
         .resume-item-koreksi { flex: 1; background: #fee2e2; padding: 8px; border-radius: 6px; }
         .resume-item-belum { flex: 1; background: #f3f4f6; padding: 8px; border-radius: 6px; }
 
         .data-item-card { background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 10px; padding: 14px; margin-bottom: 12px; }
-        .data-label { font-size: 12px; font-weight: 700; color: #2563eb; text-transform: uppercase; margin-bottom: 4px; letter-spacing: 0.5px; }
+        .data-label { font-size: 12px; font-weight: 700; color: #16a34a; text-transform: uppercase; margin-bottom: 4px; letter-spacing: 0.5px; }
         .data-value { font-size: 15px; font-weight: 600; color: #1e293b; margin-bottom: 10px; word-break: break-word; }
-        .action-row { display: flex; gap: 8px; margin-top: 8px; }
+        .action-row { display: flex; gap: 8px; margin-top: 8px; position: relative; z-index: 2; }
         
-        .btn-sesuai { background-color: #2563eb; color: white; border: none; padding: 7px 14px; border-radius: 6px; cursor: pointer; font-size: 13px; font-weight: 600; flex: 1; }
-        .btn-sesuai:hover { background-color: #1d4ed8; }
-        .btn-koreksi { background-color: #dc2626; color: white; border: none; padding: 7px 14px; border-radius: 6px; cursor: pointer; font-size: 13px; font-weight: 600; flex: 1; }
-        .btn-koreksi:hover { background-color: #b91c1c; }
+        .btn-sesuai { background-color: #86efac; color: #14532d; border: 1px solid #4ade80; padding: 7px 14px; border-radius: 6px; cursor: pointer; font-size: 13px; font-weight: 700; flex: 1; }
+        .btn-sesuai:hover { background-color: #4ade80; }
+        
+        .btn-koreksi { background-color: #f97316; color: white; border: none; padding: 7px 14px; border-radius: 6px; cursor: pointer; font-size: 13px; font-weight: 600; flex: 1; }
+        .btn-koreksi:hover { background-color: #ea580c; }
 
-        .edit-container { display: none; margin-top: 12px; }
-        .edit-input { width: 100%; padding: 9px 12px; font-size: 14px; border: 2px solid #bfdbfe; border-radius: 6px; margin-bottom: 8px; outline: none; }
-        .btn-kirim { background-color: #16a34a; color: white; border: none; padding: 8px 12px; border-radius: 6px; cursor: pointer; font-size: 13px; width: 100%; font-weight: 600; }
-        .btn-kirim:hover { background-color: #15803d; }
+        .edit-container { display: none; margin-top: 12px; position: relative; z-index: 3; background: #ffffff; padding: 8px; border-radius: 6px; border: 1px solid #cbd5e1; }
+        .edit-input { width: 100%; padding: 9px 12px; font-size: 14px; border: 2px solid #bbf7d0; border-radius: 6px; margin-bottom: 8px; outline: none; }
+        
+        .btn-kirim { background-color: #2563eb; color: white; border: none; padding: 8px 12px; border-radius: 6px; cursor: pointer; font-size: 13px; width: 100%; font-weight: 600; }
+        .btn-kirim:hover { background-color: #1d4ed8; }
 
         .status-badge { display: inline-block; padding: 6px 12px; border-radius: 6px; font-size: 12px; font-weight: bold; margin-top: 6px; }
         .badge-sesuai { background-color: #dcfce7; color: #166534; width: 100%; text-align: center; }
-        .badge-koreksi { background-color: #fee2e2; color: #991b1b; width: 100%; word-break: break-word; }
+        .badge-koreksi { background-color: #fee2e2; color: #dc2626; width: 100%; word-break: break-word; }
 
         .final-summary-box { background: #f8fafc; border: 2px solid #cbd5e1; border-radius: 10px; padding: 18px; margin-top: 25px; margin-bottom: 20px; }
         .final-summary-header { display: flex; justify-content: space-between; align-items: center; border-bottom: 2px solid #e2e8f0; padding-bottom: 8px; margin-bottom: 12px; }
-        .final-summary-title { margin: 0; color: #1e40af; font-size: 16px; font-weight: bold; text-transform: uppercase; }
+        .final-summary-title { margin: 0; color: #15803d; font-size: 16px; font-weight: bold; text-transform: uppercase; }
         .btn-print { background-color: #0284c7; color: white; border: none; padding: 6px 12px; border-radius: 6px; font-size: 12px; font-weight: 600; cursor: pointer; }
         
         .final-summary-list { font-size: 14px; color: #334155; line-height: 1.6; }
@@ -60,7 +62,7 @@
         .final-summary-val { width: 60%; font-weight: 500; color: #0f172a; word-break: break-word; }
         .val-koreksi-text { color: #dc2626; font-weight: 600; }
 
-        .statement-box { background: #eff6ff; border: 1px solid #bfdbfe; border-radius: 10px; padding: 15px; text-align: center; margin-top: 20px; font-size: 13px; color: #1e40af; line-height: 1.5; font-weight: 600; }
+        .statement-box { background: #f0fdf4; border: 1px solid #bbf7d0; border-radius: 10px; padding: 15px; text-align: center; margin-top: 20px; font-size: 13px; color: #15803d; line-height: 1.5; font-weight: 600; }
         .title-cetak { display: none; }
 
         @media print {
@@ -75,7 +77,7 @@
             .final-summary-row { border-bottom: 1px solid #cbd5e1 !important; padding-bottom: 6px !important; margin-bottom: 8px !important; }
             .final-summary-label { color: #000000 !important; }
             .final-summary-val { color: #000000 !important; }
-            .val-koreksi-text { color: #991b1b !important; }
+            .val-koreksi-text { color: #dc2626 !important; }
         }
     </style>
 </head>
@@ -103,8 +105,8 @@
                     <div id="countSesuai" style="font-size: 18px; font-weight: bold; color: #15803d;">0</div>
                 </div>
                 <div class="resume-item-koreksi">
-                    <div style="font-size: 11px; color: #991b1b; font-weight: bold;">KOREKSI</div>
-                    <div id="countKoreksi" style="font-size: 18px; font-weight: bold; color: #b91c1c;">0</div>
+                    <div style="font-size: 11px; color: #dc2626; font-weight: bold;">KOREKSI</div>
+                    <div id="countKoreksi" style="font-size: 18px; font-weight: bold; color: #dc2626;">0</div>
                 </div>
                 <div class="resume-item-belum">
                     <div style="font-size: 11px; color: #4b5563; font-weight: bold;">BELUM</div>
@@ -135,7 +137,7 @@
 </div>
 
 <script>
-    const API_URL = "https://script.google.com/macros/s/AKfycbx_zSzJScu2H0W9yaJlRV4tr_xP4KvBsvzWUeC36Bhl4bd5QVo6T1sMRxCanHHN7cPFHQ/exec";
+    const API_URL = "https://script.google.com/macros/s/AKfycbwiGKfHzAQ9R9pFD_I39CiSTViO3JzFGn-qDKqEoZWQQZoWfhS1s-hA64vC9YfhEfBz/exec";
     
     let currentSiswaNama = "";
     let currentSiswaNipd = "";
@@ -247,7 +249,7 @@
                     <div class="data-label">${row.label}</div>
                     <div class="data-value">${row.val}</div>
                     ${badgeHtml}
-                    <div class="action-row" style="margin-top: 10px;">
+                    <div class="action-row">
                         <button class="btn-sesuai" onclick="kirimData('${row.label}', 'Sesuai', ${index})">Sesuai</button>
                         <button class="btn-koreksi" onclick="bukaFormKoreksi(${index})">Koreksi</button>
                     </div>
