@@ -158,4 +158,160 @@
         errorBox.style.display = 'none';
         loadingDiv.style.display = 'block';
 
-        fetch
+        fetch(`${API_URL}?nipd=${encodeURIComponent(nipd)}&password=${encodeURIComponent(password)}`)
+            .then(response => response.json())
+            .then(data => {
+                loadingDiv.style.display = 'none';
+
+                if (data.found) {
+                    currentSiswaNama = data.nama || '-';
+                    currentSiswaNipd = data.nipd || '-';
+
+                    let tglLahirFormatted = data.tanggalLahir || '-';
+
+                    loadedRowsData = [
+                        { label: "Nama", val: currentSiswaNama },
+                        { label: "NIPD", val: currentSiswaNipd },
+                        { label: "NISN", val: data.nisn || '-' },
+                        { label: "Jenis Kelamin", val: data.jk === 'L' ? 'Laki-Laki' : (data.jk === 'P' ? 'Perempuan' : data.jk || '-') },
+                        { label: "Tempat Lahir", val: data.tempatLahir || '-' },
+                        { label: "Tanggal Lahir", val: tglLahirFormatted },
+                        { label: "NIK", val: data.nik || '-' },
+                        { label: "Agama", val: data.agama || '-' },
+                        { label: "Alamat", val: data.alamat || '-' },
+                        { label: "RT", val: data.rt !== undefined && data.rt !== "" ? data.rt : '-' },
+                        { label: "RW", val: data.rw !== undefined && data.rw !== "" ? data.rw : '-' },
+                        { label: "Desa", val: data.desa || '-' },
+                        { label: "Kecamatan", val: data.kecamatan || '-' },
+                        { label: "Kode Pos", val: data.kodePos || '-' },
+                        { label: "Nama Ayah", val: data.namaAyah || '-' },
+                        { label: "Pekerjaan", val: data.pekerjaanAyah || '-' },
+                        { label: "Nama Ibu", val: data.namaIbu || '-' },
+                        { label: "Pekerjaan Ibu", val: data.pekerjaanIbu || '-' },
+                        { label: "Rombel Saat Ini", val: data.rombel || '-' },
+                        { label: "Sekolah Asal", val: data.sekolahAsal || '-' },
+                        { label: "Anak", val: data.anakKe ? `Anak ke-${data.anakKe}` : '-' }
+                    ];
+
+                    loadedRowsData.forEach((row, idx) => {
+                        let savedVal = data.statusKesesuaian ? data.statusKesesuaian[row.label] : "";
+                        row.koreksiVal = (savedVal && savedVal !== "Sesuai") ? savedVal : "";
+                    });
+
+                    totalFieldsCount = loadedRowsData.length;
+                    renderUI();
+                    resultCard.style.display = 'block';
+                    updateResume();
+                } else {
+                    errorBox.innerHTML = data.message || 'NIPD tidak ditemukan atau tanggal lahir salah.';
+                    errorBox.style.display = 'block';
+                }
+            })
+            .catch(error => {
+                loadingDiv.style.display = 'none';
+                errorBox.innerHTML = 'Gagal terhubung ke server sekolah. Periksa kembali jaringan internet Anda.';
+                errorBox.style.display = 'block';
+                console.error(error);
+            });
+    }
+
+    function renderUI() {
+        let cardsHtml = "";
+        let finalSummaryHtml = "";
+
+        loadedRowsData.forEach((row, index) => {
+            let savedVal = row.koreksiVal;
+            let badgeHtml = "";
+            let defaultInputVal = "";
+            let displayValHtml = row.val;
+
+            if (savedVal === "Sesuai") {
+                badgeHtml = `<div id="badgeContainer_${index}"><div class="status-badge badge-sesuai">✓ Status: Sesuai</div></div>`;
+            } else if (savedVal && savedVal !== "") {
+                badgeHtml = `<div id="badgeContainer_${index}"><div class="status-badge badge-koreksi">✎ Koreksi Tercatat: <strong>${savedVal}</strong></div></div>`;
+                defaultInputVal = savedVal;
+                displayValHtml = `${row.val} <span class="val-koreksi-text">(Koreksi: ${savedVal})</span>`;
+            } else {
+                badgeHtml = `<div id="badgeContainer_${index}"></div>`;
+            }
+
+            finalSummaryHtml += `
+                <div class="final-summary-row">
+                    <div class="final-summary-label">${row.label}</div>
+                    <div class="final-summary-val" id="summaryVal_${index}">: ${displayValHtml}</div>
+                </div>
+            `;
+
+            cardsHtml += `
+                <div class="data-item-card">
+                    <div class="data-label">${row.label}</div>
+                    <div class="data-value">${row.val}</div>
+                    ${badgeHtml}
+                    <div class="action-row" style="margin-top: 10px;">
+                        <button class="btn-sesuai" onclick="kirimData('${row.label}', 'Sesuai', ${index})">Sesuai</button>
+                        <button class="btn-koreksi" onclick="bukaFormKoreksi(${index})">Koreksi</button>
+                    </div>
+                    <div class="edit-container" id="editContainer_${index}">
+                        <input type="text" id="editInput_${index}" class="edit-input" value="${defaultInputVal}" placeholder="Ketik perbaikan yang benar...">
+                        <button class="btn-kirim" onclick="kirimKoreksiData('${row.label}', ${index})">Kirim Perbaikan</button>
+                    </div>
+                </div>
+            `;
+        });
+
+        document.getElementById('dataCardList').innerHTML = cardsHtml;
+        document.getElementById('finalSummaryContent').innerHTML = finalSummaryHtml;
+    }
+
+    function bukaFormKoreksi(index) {
+        let container = document.getElementById(`editContainer_${index}`);
+        container.style.display = container.style.display === 'block' ? 'none' : 'block';
+    }
+
+    function updateResume() {
+        let sesuai = 0, koreksi = 0, belum = 0;
+        for (let i = 0; i < totalFieldsCount; i++) {
+            let badgeText = document.getElementById(`badgeContainer_${i}`).innerText;
+            if (badgeText.includes("Sesuai")) sesuai++;
+            else if (badgeText.includes("Koreksi Tercatat")) koreksi++;
+            else belum++;
+        }
+        document.getElementById('countSesuai').innerText = sesuai;
+        document.getElementById('countKoreksi').innerText = koreksi;
+        document.getElementById('countBelum').innerText = belum;
+    }
+
+    function kirimData(fieldLabel, teksKirim, index) {
+        let payload = { nipd: currentSiswaNipd, nama: currentSiswaNama, field: fieldLabel, koreksi: teksKirim };
+
+        fetch(API_URL, { method: 'POST', body: JSON.stringify(payload) })
+        .then(res => res.json())
+        .then(() => {
+            let badgeContainer = document.getElementById(`badgeContainer_${index}`);
+            let summaryValElem = document.getElementById(`summaryVal_${index}`);
+            
+            if(teksKirim === 'Sesuai') {
+                loadedRowsData[index].koreksiVal = "";
+                badgeContainer.innerHTML = `<div class="status-badge badge-sesuai">✓ Status: Sesuai</div>`;
+                document.getElementById(`editContainer_${index}`).style.display = 'none';
+                summaryValElem.innerHTML = `: ${loadedRowsData[index].val}`;
+            } else {
+                loadedRowsData[index].koreksiVal = teksKirim;
+                badgeContainer.innerHTML = `<div class="status-badge badge-koreksi">✎ Koreksi Tercatat: <strong>${teksKirim}</strong></div>`;
+                bukaFormKoreksi(index);
+                summaryValElem.innerHTML = `: ${loadedRowsData[index].val} <span class="val-koreksi-text">(Koreksi: ${teksKirim})</span>`;
+            }
+            updateResume();
+        })
+        .catch(err => console.error(err));
+    }
+
+    function kirimKoreksiData(fieldLabel, index) {
+        let inputVal = document.getElementById(`editInput_${index}`).value.trim();
+        if (!inputVal) return;
+        kirimData(fieldLabel, inputVal, index);
+    }
+</script>
+
+</body>
+</html>
