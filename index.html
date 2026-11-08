@@ -68,6 +68,11 @@
         .statement-box { background: #eff6ff; border: 1px solid #bfdbfe; border-radius: 10px; padding: 15px; text-align: center; margin-top: 20px; font-size: 13px; color: #1e40af; line-height: 1.5; font-weight: 600; }
         .title-cetak { display: none; }
 
+        /* Area Tanda Tangan Khusus Cetak & Layar */
+        .ttd-section { display: none; margin-top: 30px; justify-content: space-between; page-break-inside: avoid; font-size: 13px; color: #000; }
+        .ttd-box { width: 45%; text-align: center; }
+        .ttd-space { height: 60px; }
+
         @media print {
             @page { size: A4; margin: 20mm; }
             body { background: #ffffff !important; padding: 0 !important; margin: 0 !important; }
@@ -81,6 +86,7 @@
             .final-summary-label { color: #000000 !important; }
             .final-summary-val { color: #000000 !important; }
             .val-koreksi-text { color: #991b1b !important; }
+            .ttd-section { display: flex !important; }
         }
     </style>
 </head>
@@ -131,6 +137,20 @@
                 <button class="btn-print" onclick="window.print()">🖨️ Cetak / Simpan A4</button>
             </div>
             <div class="final-summary-list" id="finalSummaryContent"></div>
+
+            <!-- Area Tanda Tangan untuk Cetak A4 -->
+            <div class="ttd-section">
+                <div class="ttd-box">
+                    <div>Peserta Didik,</div>
+                    <div class="ttd-space"></div>
+                    <div style="font-weight: bold; text-decoration: underline;" id="ttdSiswaName">Nama Siswa</div>
+                </div>
+                <div class="ttd-box">
+                    <div>Orang Tua / Wali Murid,</div>
+                    <div class="ttd-space"></div>
+                    <div style="font-weight: bold; text-decoration: underline;">( ......................................... )</div>
+                </div>
+            </div>
         </div>
 
         <div class="statement-box">
@@ -171,6 +191,9 @@
                 if (data.found) {
                     currentSiswaNama = data.nama || '-';
                     currentSiswaNipd = data.nipd || '-';
+
+                    // Update nama siswa di area tanda tangan cetak
+                    document.getElementById('ttdSiswaName').innerText = currentSiswaNama;
 
                     let tglLahirFormatted = data.tanggalLahir || '-';
 
@@ -292,17 +315,17 @@
         fetch(API_URL, { method: 'POST', body: JSON.stringify(payload) })
         .then(res => res.json())
         .then(() => {
-            let badgeContainer = document.getElementById(`badgeContainer_${index}`);
+            let dataContainer = document.getElementById(`badgeContainer_${index}`);
             let summaryValElem = document.getElementById(`summaryVal_${index}`);
             
             if(teksKirim === 'Sesuai') {
                 loadedRowsData[index].koreksiVal = "";
-                badgeContainer.innerHTML = `<div class="status-badge badge-sesuai">✓ Status: Sesuai</div>`;
+                dataContainer.innerHTML = `<div class="status-badge badge-sesuai">✓ Status: Sesuai</div>`;
                 document.getElementById(`editContainer_${index}`).style.display = 'none';
                 summaryValElem.innerHTML = `: ${loadedRowsData[index].val}`;
             } else {
                 loadedRowsData[index].koreksiVal = teksKirim;
-                badgeContainer.innerHTML = `<div class="status-badge badge-koreksi">✎ Koreksi Tercatat: <strong>${teksKirim}</strong></div>`;
+                dataContainer.innerHTML = `<div class="status-badge badge-koreksi">✎ Koreksi Tercatat: <strong>${teksKirim}</strong></div>`;
                 bukaFormKoreksi(index);
                 summaryValElem.innerHTML = `: ${loadedRowsData[index].val} <span class="val-koreksi-text">(Koreksi: ${teksKirim})</span>`;
             }
