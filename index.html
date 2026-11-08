@@ -79,23 +79,32 @@
             .container { box-shadow: none !important; border: none !important; max-width: 100% !important; width: 100% !important; margin: 0 !important; padding: 0 !important; border-top: none !important; }
             .search-box, .subtitle, h2, .loading, .error-box, .resume-box, .instruction, .data-item-card, .btn-print, .statement-box { display: none !important; }
             
-            /* Kotak dipaskan agar aman dan tepat 1 halaman penuh */
-            .final-summary-box { border: 2px solid #000000 !important; background: #ffffff !important; margin: 0 !important; padding: 10px 12px !important; height: auto !important; page-break-inside: avoid; page-break-after: avoid; }
+            /* Kotak diatur agar meregang pas memenuhi 1 halaman penuh secara vertikal */
+            .final-summary-box { 
+                border: 2px solid #000000 !important; 
+                background: #ffffff !important; 
+                margin: 0 !important; 
+                padding: 15px 18px !important; 
+                min-height: 275mm !important; 
+                display: flex !important; 
+                flex-direction: column !important; 
+                justify-content: space-between !important; 
+                page-break-inside: avoid; 
+                page-break-after: avoid; 
+            }
             
-            .final-summary-header { border-bottom: 2px solid #000000 !important; text-align: center; display: block !important; padding-bottom: 4px !important; margin-bottom: 6px !important; }
+            .final-summary-header { border-bottom: 2px solid #000000 !important; text-align: center; display: block !important; padding-bottom: 6px !important; margin-bottom: 8px !important; }
             .title-layar { display: none !important; }
-            .title-cetak { display: block !important; font-size: 15px !important; color: #000000 !important; text-align: center; font-weight: bold; }
+            .title-cetak { display: block !important; font-size: 16px !important; color: #000000 !important; text-align: center; font-weight: bold; }
             
-            /* Spasi dan ukuran baris dirapatkan agar tidak meluber ke halaman 2 */
-            .final-summary-list { font-size: 11.5px !important; line-height: 1.35 !important; }
-            .final-summary-row { border-bottom: 1px solid #94a3b8 !important; padding-bottom: 3px !important; margin-bottom: 4px !important; display: flex; }
+            .final-summary-list { font-size: 12px !important; line-height: 1.5 !important; }
+            .final-summary-row { border-bottom: 1px solid #94a3b8 !important; padding-bottom: 4px !important; margin-bottom: 6px !important; display: flex; }
             .final-summary-label { color: #000000 !important; width: 38% !important; font-weight: bold; }
             .final-summary-val { color: #000000 !important; width: 62% !important; }
             .val-koreksi-text { color: #991b1b !important; }
 
-            /* Tinggi spasi tanda tangan disesuaikan agar pas di bagian bawah */
-            .ttd-section { display: flex !important; margin-top: 15px !important; font-size: 12px !important; page-break-inside: avoid; }
-            .ttd-space { height: 40px !important; }
+            .ttd-section { display: flex !important; margin-top: 20px !important; font-size: 13px !important; page-break-inside: avoid; }
+            .ttd-space { height: 55px !important; }
         }
     </style>
 </head>
