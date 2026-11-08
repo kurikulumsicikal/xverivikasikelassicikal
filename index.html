@@ -69,29 +69,29 @@
         .title-cetak { display: none; }
 
         /* Area Tanda Tangan */
-        .ttd-section { display: none; margin-top: 20px; justify-content: space-between; page-break-inside: avoid; font-size: 11px; color: #000; }
+        .ttd-section { display: none; margin-top: 25px; justify-content: space-between; page-break-inside: avoid; font-size: 13px; color: #000; }
         .ttd-box { width: 45%; text-align: center; }
-        .ttd-space { height: 40px; }
+        .ttd-space { height: 55px; }
 
         @media print {
-            @page { size: A4; margin: 10mm; }
-            body { background: #ffffff !important; padding: 0 !important; margin: 0 !important; font-size: 11px !important; }
+            @page { size: A4; margin: 15mm; }
+            body { background: #ffffff !important; padding: 0 !important; margin: 0 !important; }
             .container { box-shadow: none !important; border: none !important; max-width: 100% !important; width: 100% !important; margin: 0 !important; padding: 0 !important; border-top: none !important; }
             .search-box, .subtitle, h2, .loading, .error-box, .resume-box, .instruction, .data-item-card, .btn-print, .statement-box { display: none !important; }
             
-            .final-summary-box { border: 1.5px solid #000000 !important; background: #ffffff !important; margin: 0 !important; padding: 10px !important; page-break-inside: avoid; }
-            .final-summary-header { border-bottom: 1.5px solid #000000 !important; text-align: center; display: block !important; padding-bottom: 4px !important; margin-bottom: 6px !important; }
+            .final-summary-box { border: 2px solid #000000 !important; background: #ffffff !important; margin: 0 !important; padding: 15px !important; page-break-inside: avoid; }
+            .final-summary-header { border-bottom: 2px solid #000000 !important; text-align: center; display: block !important; padding-bottom: 6px !important; margin-bottom: 10px !important; }
             .title-layar { display: none !important; }
-            .title-cetak { display: block !important; font-size: 15px !important; color: #000000 !important; text-align: center; font-weight: bold; }
+            .title-cetak { display: block !important; font-size: 16px !important; color: #000000 !important; text-align: center; font-weight: bold; }
             
-            .final-summary-list { font-size: 11px !important; line-height: 1.25 !important; }
-            .final-summary-row { border-bottom: 1px solid #cbd5e1 !important; padding-bottom: 3px !important; margin-bottom: 3px !important; display: flex; }
-            .final-summary-label { color: #000000 !important; width: 35% !important; }
-            .final-summary-val { color: #000000 !important; width: 65% !important; }
+            .final-summary-list { font-size: 13px !important; line-height: 1.5 !important; }
+            .final-summary-row { border-bottom: 1px solid #cbd5e1 !important; padding-bottom: 4px !important; margin-bottom: 6px !important; display: flex; }
+            .final-summary-label { color: #000000 !important; width: 40% !important; }
+            .final-summary-val { color: #000000 !important; width: 60% !important; }
             .val-koreksi-text { color: #991b1b !important; }
 
-            .ttd-section { display: flex !important; margin-top: 15px !important; font-size: 11px !important; }
-            .ttd-space { height: 40px !important; }
+            .ttd-section { display: flex !important; margin-top: 20px !important; font-size: 13px !important; }
+            .ttd-space { height: 50px !important; }
         }
     </style>
 </head>
@@ -274,7 +274,7 @@
                 </div>
             `;
 
-    cardsHtml += `
+            cardsHtml += `
                 <div class="data-item-card">
                     <div class="data-label">${row.label}</div>
                     <div class="data-value">${row.val}</div>
