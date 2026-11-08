@@ -69,33 +69,31 @@
         .title-cetak { display: none; }
 
         /* Area Tanda Tangan */
-        .ttd-section { display: none; margin-top: 40px; justify-content: space-between; page-break-inside: avoid; font-size: 14px; color: #000; }
-        .ttd-box { width: 40%; text-align: center; }
-        .ttd-space { height: 75px; }
+        .ttd-section { display: none; margin-top: 25px; justify-content: space-between; page-break-inside: avoid; font-size: 13px; color: #000; }
+        .ttd-box { width: 45%; text-align: center; }
+        .ttd-space { height: 50px; }
 
         @media print {
-            @page { size: A4; margin: 12mm; }
+            @page { size: A4; margin: 10mm; }
             body { background: #ffffff !important; padding: 0 !important; margin: 0 !important; }
             .container { box-shadow: none !important; border: none !important; max-width: 100% !important; width: 100% !important; margin: 0 !important; padding: 0 !important; border-top: none !important; }
             .search-box, .subtitle, h2, .loading, .error-box, .resume-box, .instruction, .data-item-card, .btn-print, .statement-box { display: none !important; }
             
-            /* Membuat kotak resume memenuhi satu halaman penuh secara vertikal */
-            .final-summary-box { border: 2px solid #000000 !important; background: #ffffff !important; margin: 0 !important; padding: 20px 25px !important; min-height: 270mm !important; display: flex !important; flex-direction: column !important; justify-content: space-between !important; page-break-inside: avoid; }
+            /* Menggunakan height auto dan padding yang pas agar tepat 1 halaman penuh tanpa halaman kosong */
+            .final-summary-box { border: 2px solid #000000 !important; background: #ffffff !important; margin: 0 !important; padding: 12px 15px !important; height: auto !important; page-break-inside: avoid; page-break-after: avoid; }
             
-            .final-summary-header { border-bottom: 2px solid #000000 !important; text-align: center; display: block !important; padding-bottom: 10px !important; margin-bottom: 15px !important; }
+            .final-summary-header { border-bottom: 2px solid #000000 !important; text-align: center; display: block !important; padding-bottom: 6px !important; margin-bottom: 8px !important; }
             .title-layar { display: none !important; }
-            .title-cetak { display: block !important; font-size: 18px !important; color: #000000 !important; text-align: center; font-weight: bold; letter-spacing: 1px; }
+            .title-cetak { display: block !important; font-size: 16px !important; color: #000000 !important; text-align: center; font-weight: bold; }
             
-            /* Ukuran font normal dan jarak baris yang proporsional */
-            .final-summary-list { font-size: 13.5px !important; line-height: 1.65 !important; }
-            .final-summary-row { border-bottom: 1px solid #94a3b8 !important; padding-bottom: 6px !important; margin-bottom: 8px !important; display: flex; }
+            .final-summary-list { font-size: 12.5px !important; line-height: 1.45 !important; }
+            .final-summary-row { border-bottom: 1px solid #94a3b8 !important; padding-bottom: 4px !important; margin-bottom: 5px !important; display: flex; }
             .final-summary-label { color: #000000 !important; width: 38% !important; font-weight: bold; }
             .final-summary-val { color: #000000 !important; width: 62% !important; }
             .val-koreksi-text { color: #991b1b !important; }
 
-            /* Posisi tanda tangan di bagian bawah penuh */
-            .ttd-section { display: flex !important; margin-top: 30px !important; margin-bottom: 10px !important; font-size: 14px !important; }
-            .ttd-space { height: 75px !important; }
+            .ttd-section { display: flex !important; margin-top: 20px !important; font-size: 13px !important; page-break-inside: avoid; }
+            .ttd-space { height: 50px !important; }
         }
     </style>
 </head>
